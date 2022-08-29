@@ -30,7 +30,7 @@ func (m *Migrator) RunWithoutForeignKey(fc func() error) error {
 func (m Migrator) HasTable(value interface{}) bool {
 	var count int
 	m.Migrator.RunWithValue(value, func(stmt *gorm.Statement) error {
-		return m.DB.Raw("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='?'", stmt.Table).Row().Scan(&count)
+		return m.DB.Raw("SELECT count(*) FROM sqlite_master WHERE type='table' AND name=?", stmt.Table).Row().Scan(&count)
 	})
 	return count > 0
 }
