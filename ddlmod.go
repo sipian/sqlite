@@ -76,14 +76,14 @@ func parseDDL(strs ...string) (*ddl, error) {
 				}
 
 				if bracketLevel < 0 {
-					return nil, errors.New("invalid DDL, unbalanced brackets")
+					return nil, errors.New("invalid DDL, unbalanced brackets. str : " + str)
 				}
 
 				buf += string(c)
 			}
 
 			if bracketLevel != 0 {
-				return nil, errors.New("invalid DDL, unbalanced brackets")
+				return nil, errors.New("invalid DDL, unbalanced brackets. str : " + str)
 			}
 
 			if buf != "" {
